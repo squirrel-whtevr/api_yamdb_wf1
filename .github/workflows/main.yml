@@ -53,8 +53,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "docker-compose.yaml, nginx/default.conf, .env"
-          target: "~/config"
+          source: "docker-compose.yaml, nginx/default.conf, .env, static, media"
+          target: "~"
       - name: Docker install
         uses: appleboy/ssh-action@master
         with:
@@ -88,7 +88,6 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker pull squirrelwhtevr/yamdb:latest
-            cd config
             sudo docker-compose stop
             sudo docker-compose rm web
             sudo docker-compose up -d
