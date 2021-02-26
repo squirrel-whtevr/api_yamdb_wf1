@@ -53,8 +53,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-        source: "docker-compose.yaml, nginx/default.conf"
-        target: "~/config"
+          source: "docker-compose.yaml, nginx/default.conf"
+          target: "~/config"
       - name: Docker install
         uses: appleboy/ssh-action@master
         with:
