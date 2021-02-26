@@ -65,6 +65,7 @@ jobs:
           script: |
             sudo apt-get update && sudo apt-get upgrade
             sudo apt-get install docker.io docker-compose -y
+
             sudo systemctl enable --now docker
 
       - name: Executing remote ssh commands to deploy
@@ -75,6 +76,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) &&
+            sudo docker rmi $(sudo docker images -q)
             sudo docker pull squirrelwhtevr/yamdb:latest
             sudo docker-compose stop
             sudo docker-compose rm web
