@@ -64,8 +64,9 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo apt-get update && sudo apt-get upgrade
-            sudo apt install docker.io docker-compose -y
+            sudo apt-get install docker.io docker-compose -y
             sudo systemctl enable --now docker
+
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
