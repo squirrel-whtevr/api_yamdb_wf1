@@ -59,13 +59,13 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-            username: ${{ secrets.USER }}
-            key: ${{ secrets.SSH_KEY }}
-            passphrase: ${{ secrets.PASSPHRASE }}
-            script: |
-              sudo apt-get update && sudo apt-get upgrade
-              sudo apt install docker.io docker-compose -y
-              sudo systemctl enable --now docker
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            sudo apt-get update && sudo apt-get upgrade
+            sudo apt install docker.io docker-compose -y
+            sudo systemctl enable --now docker
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
