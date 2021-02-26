@@ -2,25 +2,28 @@
 # Api_yamdb_final
 
 Project Api_yamdb is a platform for collecting user reviews for titles of different categories. Also users can rate titles and commnet reviews.
-[![Workflow](https://github.com/squirrel-whtevr/api_yamdb_wf1/workflows/main/badge.svg)]()
+[![Workflow](https://github.com/squirrel-whtevr/api_yamdb_wf1/workflows/main/badge.svg)]
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+The project will be tested and deployed to your server via Github Actions after you push it to your git repository.
 
 ### Prerequisites
 
-To run up this project you will need Docker, you can download it from [here](https://www.docker.com/products/docker-desktop) and follow the [installation instructions](https://docs.docker.com)
+To run this project on your server you need to add following [git secrets](https://docs.github.com/en/actions/reference/encrypted-secrets) to your repository:
+DOCKER_USER, DOCKER_PASSWORD - username and password of your docker account
+HOST, USER, SSH_KEY, PASSPHRASE (optional) - server public ip, username used to connect to server, private id_rsa key and passphrase for id_rsa key (if needed)
+TELEGRAM_TO, TELEGRAM_TOKEN - ID of your telegram account and token of your telegram bot (if you wish to recieve message about completed workflow)
 
+There is an example .env file named .env.example. Rename it to .env and change values of variables for work with database if needed.
+Also you will need server and CLI to connect to your server via SSH. 
 
 ### Installing
 
-To start working with project execute following commands via bash from project app. It will start two docker containers with api_yamdb and Postgres.
+After github workflow is complete execute following commands via CLI from home directory on your server
+
+To get into app container
 ```
-docker-compose up
-```
-To get into app container - execute following command via new bash window
-```
-docker exec -it infra_sp2_web_1 bash
+docker exec -it api_yamdb_web_1 bash
 ```
 From there you will be able to create database
 ```
@@ -35,7 +38,11 @@ To apply fixtures
 ```
 python manage.py loaddata dump.json
 ```
-The app will be available at http://127.0.0.1:8000. For example, you can browse titles at http://127.0.0.1:8000/api/v1/titles
+To collect static
+```
+python manage.py collectstatic
+```
+The app will be available at your server ip address. For example, you can browse titles at http://XX.XX.XX.XX/api/v1/titles, more api specification can be found at http://XX.XX.XX.XX/redoc
 
 ## Built With
 
