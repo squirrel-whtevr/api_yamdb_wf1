@@ -88,6 +88,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker pull squirrelwhtevr/yamdb:latest
+            cd config
             sudo docker-compose stop
             sudo docker-compose rm web
             sudo docker-compose up
